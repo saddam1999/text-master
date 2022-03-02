@@ -1,0 +1,212 @@
+   _____  ____  _    _ _____   _____ ______    _____ ____  _____  ______ 
+  / ____|/ __ \| |  | |  __ \ / ____|  ____|  / ____/ __ \|  __ \|  ____|
+ | (___ | |  | | |  | | |__) | |    | |__    | |   | |  | | |  | | |__   
+  \___ \| |  | | |  | |  _  /| |    |  __|   | |   | |  | | |  | |  __|  
+  ____) | |__| | |__| | | \ \| |____| |____  | |___| |__| | |__| | |____ 
+ |_____/ \____/ \____/|_|  \_\\_____|______|  \_____\____/|_____/|______|
+
+  __  __   _   ___ _  _        ___ 
+ |  \/  | /_\ |_ _| \| |      / __|
+ | |\/| |/ _ \ | || .` |  _  | (__ 
+ |_|  |_/_/ \_\___|_|\_| (_)  \___|
+ #include <stdio.h>
+ #include <stdlib.h>
+ #include "include/text_master.h"
+
+ int main()
+ {
+    system("cls");
+    showBanner();
+
+    int userChoice, loopStop = 0;
+    while (loopStop == 0)
+    {
+        userChoice = getchar();
+
+        switch (userChoice)
+        {
+        case '1':
+            loopStop++;
+            system("cls");
+            showSource();
+            break;
+
+        case '2':
+            loopStop++;
+            system("cls");
+            startEncryptDecrypt(1);
+            break;
+
+         case '3':
+            loopStop++;
+            system("cls");
+            startEncryptDecrypt(0);
+            break;
+
+         case '4':
+            loopStop++;
+            system("cls");
+            showLogs(0);
+            break;
+
+         case '5':
+            loopStop++;
+            system("cls");
+            showLogs(1);
+            break;
+
+         case '6':
+            exit(0);
+
+         default:
+            printf("\n [INVALID INPUT, PLEASE TRY AGAIN]\n YOUR INPUT IS --> ");
+            getchar();
+        }
+    }
+    showExitBanner();
+    return 0;
+ }
+ 
+  _____ _____  _______ __  __       _  _ 
+ |_   _| __\ \/ /_   _|  \/  |     | || |
+   | | | _| >  <  | | | |\/| |  _  | __ |
+   |_| |___/_/\_\ |_| |_|  |_| (_) |_||_|
+ #include <ctype.h>
+ #include <stdio.h>
+ #include <string.h>
+ #include <time.h>
+
+ int charReading;
+ FILE *filePointer;
+
+ void showBanner()
+ {
+    filePointer = fopen("src/1_banner.txt", "r");
+
+    charReading = fgetc(filePointer);
+    while (charReading != EOF)
+    {
+        fputc(charReading, stdout);
+        charReading = fgetc(filePointer);
+    }
+    fclose(filePointer);
+ }
+
+ void showExitBanner()
+ {
+    printf("\n");
+    filePointer = fopen("src/2_e_banner.txt", "r");
+
+    charReading = fgetc(filePointer);
+    while (charReading != EOF)
+    {
+        fputc(charReading, stdout);
+        charReading = fgetc(filePointer);
+    }
+    fclose(filePointer);
+    fflush(stdin);
+    getchar();
+ }
+
+ void showSource()
+ {
+    filePointer = fopen("src/3_source.txt", "r");
+
+    charReading = fgetc(filePointer);
+    while (charReading != EOF)
+    {
+        fputc(charReading, stdout);
+        charReading = fgetc(filePointer);
+    }
+    fclose(filePointer);
+ }
+
+ void showLogs(int userOption)
+ {
+    if (userOption == 1)
+    {
+        filePointer = fopen("var/logs/logs.txt", "r");
+
+        charReading = fgetc(filePointer);
+        while (charReading != EOF)
+        {
+            fputc(charReading, stdout);
+            charReading = fgetc(filePointer);
+        }
+        fclose(filePointer);
+    }
+    else
+    {
+        filePointer = fopen("var/logs/logs.txt", "w");
+        fclose(filePointer);
+    }
+ }
+
+ void showInstruction()
+ {
+    filePointer = fopen("src/4_instruction.txt", "r");
+
+    charReading = fgetc(filePointer);
+    while (charReading != EOF)
+    {
+        fputc(charReading, stdout);
+        charReading = fgetc(filePointer);
+    }
+    fclose(filePointer);
+ }
+
+ void showOutput(char userString[], int userOption)
+ {
+    time_t currentTime;
+    time(&currentTime);
+
+    char timeUpper[30], *PTR2 = &timeUpper[0];
+    strcpy(timeUpper, ctime(&currentTime));
+    while (*PTR2 != '\0')
+    {
+        *PTR2 = toupper((int)*PTR2);
+        PTR2++;
+    }
+    timeUpper[strcspn(timeUpper, "\n")] = 0;
+
+    filePointer = fopen("var/logs/logs.txt", "a");
+    if (userOption == 1)
+    {
+        fprintf(filePointer, "\n [ENCRYPTION LOG --> %s]\n [ENCRYPTED TEXT --> %s]\n", timeUpper, userString);
+        fprintf(stdout, "\n [ENCRYPTION DONE --> %s]\n [ENCRYPTED TEXT --> %s]\n", timeUpper, userString);
+    }
+    else
+    {
+        fprintf(filePointer, "\n [DECRYPTION LOG --> %s]\n [DECRYPTED TEXT --> %s]\n", timeUpper, userString);
+        fprintf(stdout, "\n [DECRYPTION DONE --> %s]\n [DECRYPTED TEXT --> %s]\n", timeUpper, userString);
+    }
+ }
+
+ void startEncryptDecrypt(int userOption)
+ {
+    getchar();
+    showInstruction();
+
+    char userString[1000], *PTR = &userString[0];
+    fgets(userString, 1000, stdin);
+    userString[strcspn(userString, "\n")] = 0;
+
+    if (userOption == 1)
+    {
+        while (*PTR != '\0')
+        {
+            *PTR = *PTR + 1;
+            PTR++;
+        }
+        showOutput(userString, 1);
+    }
+    else
+    {
+        while (*PTR != '\0')
+        {
+            *PTR = *PTR - 1;
+            PTR++;
+        }
+        showOutput(userString, 0);
+    }
+ }
