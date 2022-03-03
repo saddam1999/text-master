@@ -4,7 +4,7 @@
 
 int main()
 {
-    system("cls");
+    system("clear");
     showBanner();
 
     int userChoice, loopStop = 0;
@@ -16,31 +16,31 @@ int main()
         {
         case '1':
             loopStop++;
-            system("cls");
+            system("clear");
             showSource();
             break;
 
         case '2':
             loopStop++;
-            system("cls");
+            system("clear");
             startEncryptDecrypt(1);
             break;
 
         case '3':
             loopStop++;
-            system("cls");
+            system("clear");
             startEncryptDecrypt(0);
             break;
 
         case '4':
             loopStop++;
-            system("cls");
+            system("clear");
             showLogs(0);
             break;
 
         case '5':
             loopStop++;
-            system("cls");
+            system("clear");
             showLogs(1);
             break;
 
