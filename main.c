@@ -7,7 +7,7 @@ void main()
     system("cls");
     showBanner();
 
-    int userChoice, loopStop = 0;
+    short int userChoice, loopStop = 0;
     while (loopStop == 0)
     {
         userChoice = getchar();

@@ -3,18 +3,18 @@
 #include <string.h>
 #include <time.h>
 
-int charReading;
+short int charReading;
 FILE *filePointer;
 
 void showBanner()
 {
     filePointer = fopen("src/1_banner.txt", "r");
 
-    charReading = fgetc(filePointer);
+    charReading = (short int)fgetc(filePointer);
     while (charReading != EOF)
     {
         fputc(charReading, stdout);
-        charReading = fgetc(filePointer);
+        charReading = (short int)fgetc(filePointer);
     }
     fclose(filePointer);
 }
@@ -24,11 +24,11 @@ void showExitBanner()
     printf("\n");
     filePointer = fopen("src/2_e_banner.txt", "r");
 
-    charReading = fgetc(filePointer);
+    charReading = (short int)fgetc(filePointer);
     while (charReading != EOF)
     {
         fputc(charReading, stdout);
-        charReading = fgetc(filePointer);
+        charReading = (short int)fgetc(filePointer);
     }
     fclose(filePointer);
     fflush(stdin);
@@ -39,27 +39,27 @@ void showSource()
 {
     filePointer = fopen("src/3_source.txt", "r");
 
-    charReading = fgetc(filePointer);
+    charReading = (short int)fgetc(filePointer);
     while (charReading != EOF)
     {
         fputc(charReading, stdout);
-        charReading = fgetc(filePointer);
+        charReading = (short int)fgetc(filePointer);
     }
     fclose(filePointer);
     printf("\n");
 }
 
-void showLogs(int userOption)
+void showLogs(short int userOption)
 {
     if (userOption == 1)
     {
         filePointer = fopen("var/logs/logs.txt", "r");
 
-        charReading = fgetc(filePointer);
+        charReading = (short int)fgetc(filePointer);
         while (charReading != EOF)
         {
             fputc(charReading, stdout);
-            charReading = fgetc(filePointer);
+            charReading = (short int)fgetc(filePointer);
         }
         fclose(filePointer);
     }
@@ -74,16 +74,16 @@ void showInstruction()
 {
     filePointer = fopen("src/4_instruction.txt", "r");
 
-    charReading = fgetc(filePointer);
+    charReading = (short int)fgetc(filePointer);
     while (charReading != EOF)
     {
         fputc(charReading, stdout);
-        charReading = fgetc(filePointer);
+        charReading = (short int)fgetc(filePointer);
     }
     fclose(filePointer);
 }
 
-void showOutput(char userString[], int userOption)
+void showOutput(char userString[], short int userOption)
 {
     time_t currentTime;
     time(&currentTime);
@@ -110,7 +110,7 @@ void showOutput(char userString[], int userOption)
     }
 }
 
-void startEncryptDecrypt(int userOption)
+void startEncryptDecrypt(short int userOption)
 {
     getchar();
     showInstruction();
