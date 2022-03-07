@@ -13,7 +13,7 @@
  #include <stdlib.h>
  #include "include/text_master.h"
 
- int main()
+ void main()
  {
     system("cls");
     showBanner();
@@ -64,7 +64,6 @@
         }
     }
     showExitBanner();
-    return 0;
  }
  
   _____ _____  _______ __  __       _  _ 
