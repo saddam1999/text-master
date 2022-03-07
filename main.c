@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include "include/textm.h"
 
-int main()
+void main()
 {
     system("clear");
     showBanner();
@@ -53,5 +53,4 @@ int main()
         }
     }
     showExitBanner();
-    return 0;
 }
